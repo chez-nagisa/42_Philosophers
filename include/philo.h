@@ -6,7 +6,7 @@
 /*   By: nhara <nhara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:50:41 by nhara             #+#    #+#             */
-/*   Updated: 2025/05/14 09:39:56 by nhara            ###   ########.fr       */
+/*   Updated: 2025/05/14 15:28:16 by nhara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_philo
 	pthread_mutex_t *write_lock; // 出力の排他制御（コンソールへの書き込み）
 	pthread_mutex_t *dead_lock;  // 死亡フラグの排他制御
 	pthread_mutex_t *meal_lock;  // 食事回数・最後の食事時間の排他制御
-}	t_philo;
+}		t_philo;
 
 typedef struct s_program
 {
@@ -47,6 +47,18 @@ typedef struct s_program
 	pthread_mutex_t meal_lock;  // 全哲学者の食事回数の排他制御（ミューテックス）
 	pthread_mutex_t write_lock; // 標準出力の排他制御（ミューテックス）
 	t_philo *philos;            // 哲学者（t_philo）の配列
-}	t_program;
+}		t_program;
+
+void	input_init(t_philo *philo, char **av, int ac);
+void	philos_init(t_philo *philos, t_program *program, pthread_mutex_t *forks,
+			char **av) void forks_init(pthread_mutex_t *forks,
+			int num_of_philos);
+void	*monitor(void *pointer);
+void	print_status(char *status, t_philo *philo, int id);
+int		create_threads(t_program *program, pthread_mutex_t *forks);
+void	destroy_all(char *message, t_program *program, pthread_mutex_t *forks);
+int		ft_usleep(size_t ms);
+size_t	get_ms_time(void);
+int		main(int ac, char **av);
 
 #endif
