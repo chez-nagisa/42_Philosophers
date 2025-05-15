@@ -13,7 +13,7 @@
 #include "../include/philo.h"
 
 //ユーザーの入力を設定
-void	input_init(t_philo *philo, char **av, int ac)
+void	input_init(t_philo *philo, char **av)
 {
 	philo->num_of_philos = ft_atoi(av[1]);
 	philo->time_to_die = ft_atoi(av[2]);
