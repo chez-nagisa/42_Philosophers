@@ -6,14 +6,15 @@
 /*   By: nhara <nhara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:50:41 by nhara             #+#    #+#             */
-/*   Updated: 2025/05/14 15:28:16 by nhara            ###   ########.fr       */
+/*   Updated: 2025/05/15 12:20:09 by nhara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
-# define PHILO_MAX 200 // 200じゃないの？
+# define PHILO_MAX 300 // 200じゃないの？
 # include <pthread.h>
+# include <stdio.h>
 # include <sys/time.h>
 # include <unistd.h>
 
@@ -49,16 +50,23 @@ typedef struct s_program
 	t_philo *philos;            // 哲学者（t_philo）の配列
 }		t_program;
 
-void	input_init(t_philo *philo, char **av, int ac);
+int		ft_strlen(char *str);
+int		ft_atoi(char *str);
+void	input_init(t_philo *philo, char **av);
 void	philos_init(t_philo *philos, t_program *program, pthread_mutex_t *forks,
-			char **av) void forks_init(pthread_mutex_t *forks,
-			int num_of_philos);
+			char **av);
+void	forks_init(pthread_mutex_t *forks, int num_of_philos);
+void	program_init(t_program *program, t_philo *philos);
 void	*monitor(void *pointer);
+int		dead_loop(t_philo *philo);
 void	print_status(char *status, t_philo *philo, int id);
 int		create_threads(t_program *program, pthread_mutex_t *forks);
 void	destroy_all(char *message, t_program *program, pthread_mutex_t *forks);
 int		ft_usleep(size_t ms);
 size_t	get_ms_time(void);
+void	think(t_philo *philo);
+void	rest(t_philo *philo);
+void	eat(t_philo *philo);
 int		main(int ac, char **av);
 
 #endif

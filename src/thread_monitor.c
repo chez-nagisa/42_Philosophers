@@ -6,7 +6,7 @@
 /*   By: nhara <nhara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 09:54:28 by nhara             #+#    #+#             */
-/*   Updated: 2025/05/14 14:14:40 by nhara            ###   ########.fr       */
+/*   Updated: 2025/05/15 12:23:30 by nhara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	check_all_if_dead(t_philo *philos)
 		if (check_if_one_dead(&philos[i], philos[i].time_to_die))
 		{
 			print_status("died", &philos[i], philos[i].id);
-			pthread_mutex_lock(philos[i].dead_lock);
-			*(philos[i].dead) = 1; //死亡フラグを立てる
-			pthread_mutex_unlock(philos[i].dead_lock);
+			pthread_mutex_lock(philos[0].dead_lock);
+			*philos->dead = 1; //死亡フラグを立てる
+			pthread_mutex_unlock(philos[0].dead_lock);
 			return (1); //死亡した
 		}
 		i++;
@@ -101,7 +101,7 @@ void	*monitor(void *pointer)
 	//構造体ポインタにキャスト
 	philos = (t_philo *)pointer;
 	while (1) //無限ループ
-		if (check_all_if_dead(philos) || check_all_if_ate(philos))
+		if (check_all_if_dead(philos) == 1 || check_all_if_ate(philos) == 1)
 			break ; //死亡したか、全員が食べた場合、ループを終了
 	return (pointer);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.c                                          :+:      :+:    :+:   */
+/*   threads_philos.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhara <nhara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:20:39 by nhara             #+#    #+#             */
-/*   Updated: 2025/05/14 09:45:34 by nhara            ###   ########.fr       */
+/*   Updated: 2025/05/15 12:06:07 by nhara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*philo_routine(void *pointer)
 	while (!dead_loop(philo))
 	{
 		eat(philo);
-		sleep(philo);
+		rest(philo);
 		think(philo);
 	}
 	return (pointer);

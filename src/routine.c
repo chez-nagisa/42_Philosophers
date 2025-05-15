@@ -6,11 +6,11 @@
 /*   By: nhara <nhara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:08:58 by nhara             #+#    #+#             */
-/*   Updated: 2025/05/14 15:32:14 by nhara            ###   ########.fr       */
+/*   Updated: 2025/05/15 12:03:48 by nhara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 void	think(t_philo *philo)
 {
