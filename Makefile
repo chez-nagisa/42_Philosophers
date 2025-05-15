@@ -12,7 +12,7 @@
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -pthread
+CFLAGS = -Wall -Wextra -Werror -O3 -pthread #自分のパソコンでやる時は-Werrorを消す
 SRCS = src/main.c src/init.c src/routine.c src/thread_monitor.c src/threads_philos.c src/utils.c
 OBJS = $(SRCS:.c=.o)
 HEADER = ./src/philo.h
@@ -23,11 +23,11 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(INCLUDE)
 
-%.o: %.c
+src/%.o: src/%.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) src/*.o
 
 fclean: clean
 	rm -f $(NAME)
