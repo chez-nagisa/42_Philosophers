@@ -6,11 +6,11 @@
 /*   By: nhara <nhara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:49:40 by nhara             #+#    #+#             */
-/*   Updated: 2025/05/15 12:02:11 by nhara            ###   ########.fr       */
+/*   Updated: 2025/05/16 14:41:46 by nhara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "philo.h"
 
 int	check_arg(char *av)
 {
@@ -37,7 +37,7 @@ int	check_valid_arg(char **av)
 		return (write(2, "Error: Invalid time to eat\n", 27), 1);
 	if (ft_atoi(av[4]) <= 0 || check_arg(av[4]) == 1)
 		return (write(2, "Error: Invalid time to sleep\n", 29), 1);
-	if (av[5] && (ft_atoi(av[5]) <= 0 || check_arg(av[5]) == 1))
+	if (av[5] && (ft_atoi(av[5]) < 0 || check_arg(av[5]) == 1))
 		return (write(2,
 				"Error: Invalid number of times each philosopher must eat\n",
 				52), 1);

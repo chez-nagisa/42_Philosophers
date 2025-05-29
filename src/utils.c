@@ -6,11 +6,11 @@
 /*   By: nhara <nhara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:22:27 by nhara             #+#    #+#             */
-/*   Updated: 2025/05/15 12:07:06 by nhara            ###   ########.fr       */
+/*   Updated: 2025/05/16 14:38:10 by nhara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "philo.h"
 
 int	ft_strlen(char *str)
 {
@@ -33,8 +33,7 @@ int	ft_atoi(char *str)
 	i = 0;
 	sign = 1;
 	result = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\r'
-		|| str[i] == '\v' || str[i] == '\f')
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
@@ -45,6 +44,10 @@ int	ft_atoi(char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = result * 10 + (str[i] - '0');
+		if (result > 2147483647 && sign == 1)
+			return (-1);
+		if (result > 2147483648 && sign == -1)
+			return (-1);
 		i++;
 	}
 	return (result * sign);
@@ -69,25 +72,22 @@ void	destroy_all(char *message, t_program *program, pthread_mutex_t *forks)
 		i++;
 	}
 }
-// usleepはマイクロ秒単位でスリープから、指定時間が長いと誤差が大きい。そのため自作する。
+
 int	ft_usleep(size_t ms)
 {
 	size_t	start_time;
 
-	// 現在の時刻を取得
 	start_time = get_ms_time();
-	// 指定された時間だけスリープ
 	while (get_ms_time() - start_time < ms)
 		usleep(500);
 	return (0);
 }
+
 size_t	get_ms_time(void)
 {
 	struct timeval	time;
 
-	// 現在時刻を秒（s）とマイクロ秒（μs）で取得
-	if (gettimeofday(&time, NULL) == -1) // 失敗した場合
+	if (gettimeofday(&time, NULL) == -1)
 		write(2, "Error: gettimeofday failed\n", 28);
-	// 秒とマイクロ秒をミリ秒に変換
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
